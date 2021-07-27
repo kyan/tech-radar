@@ -1,25 +1,15 @@
 {
-  "name": "build-your-own-radar",
-  "version": "0.3.0",
-  "description": "",
-  "main": "index.js",
+  "name": "tech-radar",
+  "private": true,
   "scripts": {
-    "test": "standard --fix && istanbul cover jasmine",
-    "test:lint": "npx standard",
+    "test": "istanbul cover jasmine",
+    "lint": "yarn run standard",
+    "lint:fix": "yarn run standard --fix",
     "dev": "webpack-dev-server --mode development --inline",
     "build": "webpack --mode production",
     "end_to_end_test": "node_modules/.bin/cypress run --env host=$TEST_URL",
     "start": "node_modules/.bin/cypress open --env host=$TEST_URL"
   },
-  "author": "Thoughtworks",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thoughtworks/build-your-own-radar"
-  },
-  "keywords": [
-    "tech-radar"
-  ],
-  "license": "AGPL-3.0",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "babel-loader": "^8.0.4",
