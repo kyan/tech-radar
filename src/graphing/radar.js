@@ -489,9 +489,8 @@ const Radar = function (size, radar) {
       .on('click', redrawFullRadar)
 
     header.select('.radar-title')
-      .append('div')
-      .attr('class', 'radar-title__description')
       .append('p')
+      .attr('class', 'radar-title__description')
       .text('Libero, id proin eu nunc pulvinar nibh mus suspendisse in. Sollicitudin tristique turpis purus lacus, arcu non nec vivamus bibendum. Quam ornare nullam at pharetra, fringilla.')
 
     buttonsGroup = header.append('div')
@@ -499,6 +498,49 @@ const Radar = function (size, radar) {
 
     quadrantButtons = buttonsGroup.append('div')
       .classed('quadrant-btn--group', true)
+
+    teamKey = header.append('div')
+      .classed('team-key', true)
+      .append('ul')
+      .attr('class', 'team-key__list')
+
+
+    //Design team
+    teamKey = header.select('.team-key__list')
+      .append('li')
+      .attr('class', 'team-key__team team-key__team--design')
+      .append('div')
+      .attr('class', 'team-key__box team-key__box--desing')
+
+    teamKey = header.select('.team-key__team--design')
+      .append('p')
+      .attr('class', 'team-key__title')
+      .text('Design')
+
+    //QA team
+    teamKey = header.select('.team-key__list')
+      .append('li')
+      .attr('class', 'team-key__team team-key__team--qa')
+      .append('div')
+      .attr('class', 'team-key__box team-key__box--qa')
+
+    teamKey = header.select('.team-key__team--qa')
+      .append('p')
+      .attr('class', 'team-key__title')
+      .text('QA')
+
+    //Engineering team
+    teamKey = header.select('.team-key__list')
+      .append('li')
+      .attr('class', 'team-key__team team-key__team--engineering')
+      .append('div')
+      .attr('class', 'team-key__box  team-key__box--engineering')
+
+    teamKey = header.select('.team-key__team--engineering')
+      .append('p')
+      .attr('class', 'team-key__title')
+      .text('Engineering')
+
 
     alternativeDiv = header.append('div')
       .attr('id', 'alternative-buttons')
