@@ -488,6 +488,12 @@ const Radar = function (size, radar) {
       .style('cursor', 'pointer')
       .on('click', redrawFullRadar)
 
+    header.select('.radar-title')
+      .append('div')
+      .attr('class', 'radar-title__description')
+      .append('p')
+      .text('Libero, id proin eu nunc pulvinar nibh mus suspendisse in. Sollicitudin tristique turpis purus lacus, arcu non nec vivamus bibendum. Quam ornare nullam at pharetra, fringilla.')
+
     buttonsGroup = header.append('div')
       .classed('buttons-group', true)
 
@@ -518,19 +524,26 @@ const Radar = function (size, radar) {
       addButton(quadrants[i])
     })
 
-    buttonsGroup.append('div')
-      .classed('print-radar-btn', true)
-      .append('div')
-      .classed('print-radar button no-capitalize', true)
-      .text('Print this radar')
-      .on('click', window.print.bind(window))
+    // buttonsGroup.append('div')
+    //   .classed('print-radar-btn', true)
+    //   .append('div')
+    //   .classed('print-radar button no-capitalize', true)
+    //   .text('Print this radar')
+    //   .on('click', window.print.bind(window))
 
-    alternativeDiv.append('div')
+    buttonsGroup.append('div')
       .classed('search-box', true)
       .append('input')
       .attr('id', 'auto-complete')
       .attr('placeholder', 'Search')
       .classed('search-radar', true)
+
+    // alternativeDiv.append('div')
+    //   .classed('search-box', true)
+    //   .append('input')
+    //   .attr('id', 'auto-complete')
+    //   .attr('placeholder', 'Search')
+    //   .classed('search-radar', true)
 
     AutoComplete('#auto-complete', quadrants, searchBlip)
   }
