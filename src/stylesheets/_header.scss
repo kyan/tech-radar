@@ -43,7 +43,6 @@ header {
 
       img {
         width: 150px;
-
       }
     }
   }
@@ -71,7 +70,8 @@ header {
     }
 
     input {
-      padding-left: 35px;
+      padding: 20px 0 20px 35px;
+      margin-bottom: 0;
       width: 275px;
     }
   }
@@ -89,67 +89,24 @@ header {
 
   .button {
     font-size: $baseFont;
+    font-weight: 600;
     text-transform: capitalize;
     margin-right: 20px;
-    border-radius: 2px;
+    border-radius: 0;
     padding: 10px 20px;
     cursor: pointer;
     transition: all .2s ease-out;
 
-    background-color: $grey-light;
-    color: $black;
+    background-color: $black;
+    color: $white;
 
     &.no-capitalize {
       text-transform: none;
     }
 
     &:hover, &.selected {
-
-      transform: translate(0, -2px);
-      opacity: .85;
-
-      &.first {
-        color: white;
-        background-color: $green;
-      }
-
-      &.second {
-        color: white;
-        background-color: $blue;
-      }
-
-      &.third {
-        color: white;
-        background-color: $orange;
-      }
-
-      &.fourth {
-        color: white;
-        background-color: $violet;
-      }
-    }
-
-    &.full-view {
-
-      &.first {
-        background-color: $green;
-        color: $white;
-      }
-
-      &.second {
-        background-color: $blue;
-        color: $white;
-      }
-
-      &.third {
-        background-color: $orange;
-        color: $white;
-      }
-
-      &.fourth {
-        background-color: $violet;
-        color: $white;
-      }
+      background-color: lightern($black, 5%);
+      transform: translate(0,0);
     }
   }
 
