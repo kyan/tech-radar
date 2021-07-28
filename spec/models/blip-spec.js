@@ -32,7 +32,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
-      true
+      'new'
     )
 
     expect(blip.isNew()).toBe(true)
@@ -42,9 +42,69 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
-      false
+      'unchanged'
     )
 
     expect(blip.isNew()).toBe(false)
+  })
+
+  it('is moved in', function () {
+    blip = new Blip(
+      'My Blip',
+      new Ring('My Ring'),
+      'moved_in'
+    )
+
+    expect(blip.isMovedIn()).toBe(true)
+  })
+
+  it('is not moved in', function () {
+    blip = new Blip(
+      'My Blip',
+      new Ring('My Ring'),
+      'unchanged'
+    )
+
+    expect(blip.isMovedIn()).toBe(false)
+  })
+
+  it('is moved out', function () {
+    blip = new Blip(
+      'My Blip',
+      new Ring('My Ring'),
+      'moved_out'
+    )
+
+    expect(blip.isMovedOut()).toBe(true)
+  })
+
+  it('is not moved out', function () {
+    blip = new Blip(
+      'My Blip',
+      new Ring('My Ring'),
+      'unchanged'
+    )
+
+    expect(blip.isMovedOut()).toBe(false)
+  })
+
+  it('is unchanged', function () {
+    blip = new Blip(
+      'My Blip',
+      new Ring('My Ring'),
+      'unchanged'
+    )
+
+    expect(blip.isUnchanged()).toBe(true)
+  })
+
+  it('is not unchanged', function () {
+    blip = new Blip(
+      'My Blip',
+      new Ring('My Ring'),
+      'new'
+    )
+
+    expect(blip.isUnchanged()).toBe(false)
   })
 })
