@@ -57,6 +57,7 @@ describe('Input Santizer for Protected sheet', function () {
       'name',
       'quadrant',
       'ring',
+      'department',
       'status',
       'description'
     ]
@@ -65,6 +66,7 @@ describe('Input Santizer for Protected sheet', function () {
       "Hello <script>alert('dangerous');</script>there <h1>blip</h1>",
       '<strong>techniques & tools</strong>',
       "<a href='/asd'>Adopt</a>",
+      '<b>engineering</b>',
       'new<br>',
       "<b>Hello</b> <script>alert('dangerous');</script>there <h1>heading</h1>"
     ]

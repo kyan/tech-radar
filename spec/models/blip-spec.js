@@ -7,7 +7,8 @@ describe('Blip', function () {
   beforeEach(function () {
     blip = new Blip(
       'My Blip',
-      new Ring('My Ring')
+      new Ring('My Ring'),
+      'foo_department'
     )
   })
 
@@ -28,10 +29,15 @@ describe('Blip', function () {
     expect(blip.number()).toEqual(1)
   })
 
+  it('has a department', function () {
+    expect(blip.department()).toEqual('foo_department')
+  })
+
   it('is new', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'new'
     )
 
@@ -42,6 +48,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'unchanged'
     )
 
@@ -52,6 +59,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'moved_in'
     )
 
@@ -62,6 +70,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'unchanged'
     )
 
@@ -72,6 +81,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'moved_out'
     )
 
@@ -82,6 +92,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'unchanged'
     )
 
@@ -92,6 +103,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'unchanged'
     )
 
@@ -102,6 +114,7 @@ describe('Blip', function () {
     blip = new Blip(
       'My Blip',
       new Ring('My Ring'),
+      'engineering',
       'new'
     )
 
