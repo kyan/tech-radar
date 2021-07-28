@@ -524,13 +524,6 @@ const Radar = function (size, radar) {
       addButton(quadrants[i])
     })
 
-    // buttonsGroup.append('div')
-    //   .classed('print-radar-btn', true)
-    //   .append('div')
-    //   .classed('print-radar button no-capitalize', true)
-    //   .text('Print this radar')
-    //   .on('click', window.print.bind(window))
-
     buttonsGroup.append('div')
       .classed('search-box', true)
       .append('input')
@@ -538,12 +531,6 @@ const Radar = function (size, radar) {
       .attr('placeholder', 'Search')
       .classed('search-radar', true)
 
-    // alternativeDiv.append('div')
-    //   .classed('search-box', true)
-    //   .append('input')
-    //   .attr('id', 'auto-complete')
-    //   .attr('placeholder', 'Search')
-    //   .classed('search-radar', true)
 
     AutoComplete('#auto-complete', quadrants, searchBlip)
   }
