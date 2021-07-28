@@ -216,17 +216,17 @@ body {
 
       circle, polygon, path {
         &.engineering {
-          fill: $green;
+          fill: $engineering-blue;
           stroke: none;
         }
 
         &.design {
-          fill: $blue;
+          fill: $design-green;
           stroke: none;
         }
 
         &.qa {
-          fill: $orange;
+          fill: $qa-pink;
           stroke: none;
         }
       }
