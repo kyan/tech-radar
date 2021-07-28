@@ -1,5 +1,13 @@
 const IDEAL_BLIP_WIDTH = 22
-const Blip = function (name, ring, isNew, topic, description) {
+
+const STATUSES = {
+  NEW: 'new',
+  MOVED_IN: 'moved_in',
+  MOVED_OUT: 'moved_out',
+  UNCHANGED: 'unchanged',
+}
+
+const Blip = function (name, ring, status, topic, description) {
   var self, number
 
   self = {}
@@ -20,7 +28,19 @@ const Blip = function (name, ring, isNew, topic, description) {
   }
 
   self.isNew = function () {
-    return isNew
+    return status === STATUSES.NEW
+  }
+
+  self.isMovedIn = function () {
+    return status === STATUSES.MOVED_IN
+  }
+
+  self.isMovedOut = function () {
+    return status === STATUSES.MOVED_OUT
+  }
+
+  self.isUnchanged = function () {
+    return status === STATUSES.UNCHANGED
   }
 
   self.ring = function () {
