@@ -4,7 +4,6 @@ const Chance = require('chance')
 const _ = require('lodash/core')
 
 const RingCalculator = require('../util/ringCalculator')
-const QueryParams = require('../util/queryParamProcessor')
 const AutoComplete = require('../util/autoComplete')
 
 const MIN_BLIP_WIDTH = 12
@@ -619,8 +618,7 @@ const Radar = function (size, radar) {
 
   function constructSheetUrl (sheetName) {
     var noParamUrl = window.location.href.substring(0, window.location.href.indexOf(window.location.search))
-    var queryParams = QueryParams(window.location.search.substring(1))
-    var sheetUrl = noParamUrl + '?sheetId=' + queryParams.sheetId + '&sheetName=' + encodeURIComponent(sheetName)
+    var sheetUrl = noParamUrl + '?sheetName=' + encodeURIComponent(sheetName)
     return sheetUrl
   }
 
