@@ -32,7 +32,7 @@ const plotRadar = function (title, blips, currentRadarName, alternativeRadars) {
 
   var rings = _.map(_.uniqBy(blips, 'ring'), 'ring')
   var ringMap = {}
-  var maxRings = 4
+  var maxRings = 5
 
   _.each(rings, function (ringName, i) {
     if (i === maxRings) {
