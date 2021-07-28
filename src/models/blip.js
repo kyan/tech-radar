@@ -7,7 +7,13 @@ const STATUSES = {
   UNCHANGED: 'unchanged',
 }
 
-const Blip = function (name, ring, status, topic, description) {
+const DEPARTMENTS = {
+  ENGINEERING: 'Engineering',
+  DESIGN: 'Design',
+  QA: 'QA',
+}
+
+const Blip = function (name, ring, department, status, topic, description) {
   var self, number
 
   self = {}
@@ -25,6 +31,10 @@ const Blip = function (name, ring, status, topic, description) {
 
   self.description = function () {
     return description || ''
+  }
+
+  self.department = function () {
+    return department
   }
 
   self.isNew = function () {

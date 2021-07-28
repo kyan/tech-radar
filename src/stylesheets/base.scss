@@ -214,23 +214,18 @@ body {
       }
 
       circle, polygon, path {
-        &.first {
+        &.engineering {
           fill: $green;
           stroke: none;
         }
 
-        &.second {
+        &.design {
           fill: $blue;
           stroke: none;
         }
 
-        &.third {
+        &.qa {
           fill: $orange;
-          stroke: none;
-        }
-
-        &.fourth {
-          fill: $violet;
           stroke: none;
         }
       }
