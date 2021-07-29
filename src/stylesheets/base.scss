@@ -4,6 +4,7 @@
 @import 'form';
 @import 'error';
 @import 'teamKey';
+@import 'loading';
 @import 'header';
 @import 'footer';
 @import url(https://www.thoughtworks.com/css/k8s_production/screen.css);
@@ -18,6 +19,7 @@ h1, h2, h3, h4, h5 {
   font-family: 'Biotif';
   text-transform: capitalize !important;
   font-weight: 600 !important;
+  letter-spacing: 0.01em;
 }
 
 @media print {
