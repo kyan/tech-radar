@@ -349,11 +349,14 @@ h1, h2, h3, h4, h5 {
             overflow: hidden;
             width: 300px;
 
+            > div {
+              border-top: 1px solid $grey;
+              border-bottom: 1px solid $grey;
+              margin: 20px 0;
+              padding: 0 10px;
+            }
+
             p {
-              margin: 0;
-              border-top: 1px solid rgb(119, 119, 119);
-              border-bottom: 1px solid rgb(119, 119, 119);
-              padding: 20px;
               color: $grey-text;
               font-weight: 100;
               font-size: 14px;
