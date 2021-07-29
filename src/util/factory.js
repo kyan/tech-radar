@@ -200,7 +200,7 @@ function plotLoadingMessage (content) {
     .append('div')
     .attr('class', 'loading__title')
     .append('h1')
-    .text('Tech Radar')
+    .text('Tech Radar 2021')
 }
 
 // function plotFooter (content) {
