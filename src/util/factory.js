@@ -183,10 +183,6 @@ function plotLoading (content) {
   setDocumentTitle()
 
   plotLoadingMessage(content)
-
-  //USE THIS TO BREAK LOADER WHILE DEV
-  plotBanner(content)
-
 }
 
 function plotLoadingMessage (content) {
@@ -202,25 +198,6 @@ function plotLoadingMessage (content) {
     .append('h1')
     .text('Tech Radar 2021')
 }
-
-// function plotFooter (content) {
-//   content
-//     .append('div')
-//     .attr('id', 'footer')
-//     .append('div')
-//     .attr('class', 'footer-content')
-//     .append('p')
-//     .html('Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. ' +
-//       'By using this service you agree to <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks\' terms of use</a>. ' +
-//       'You also agree to our <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather, use and protect any personal data contained in your public Google Sheet. ' +
-//       'This software is <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and self-hosting.')
-// }
-
-// function plotBanner (content, text) {
-//   content.append('div')
-//     .attr('class', 'input-sheet__banner')
-//     .html(text)
-// }
 
 function plotErrorMessage (exception) {
   var message = 'Oops! It seems like there are some problems with loading your data. '
