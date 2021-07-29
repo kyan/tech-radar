@@ -246,8 +246,8 @@ h1, h2, h3, h4, h5 {
       text {
         &.blip-text {
           font-size: 9px;
-          font-style: italic;
           fill: $white;
+          transform: translateY(-1px);
         }
 
         &.line-text {
