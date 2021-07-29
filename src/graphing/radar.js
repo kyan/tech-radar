@@ -2,6 +2,7 @@ const d3 = require('d3')
 const d3tip = require('d3-tip')
 const Chance = require('chance')
 const _ = require('lodash/core')
+const tippy = require('tippy.js').default
 
 const RingCalculator = require('../util/ringCalculator')
 const AutoComplete = require('../util/autoComplete')
@@ -164,9 +165,13 @@ const Radar = function (size, radar) {
       .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
   }
 
-  function addRing (ring, order) {
+  function addRing (name, description, order) {
     var table = d3.select('.quadrant-table.' + order)
-    table.append('h3').text(ring)
+    table.append('h3')
+      .text(name)
+      .append('span')
+      .attr('data-tippy-content', description)
+      .text('?')
     return table.append('ul')
   }
 
@@ -226,8 +231,10 @@ const Radar = function (size, radar) {
       }, 0)
       chance = new Chance(Math.PI * sumRing * ring.name().length * sumQuadrant * quadrant.name().length)
 
-      var ringList = addRing(ring.name(), order)
+      var ringList = addRing(ring.name(), ring.description(), order)
       var allBlipCoordinatesInRing = []
+
+      tippy('[data-tippy-content]');
 
       ringBlips.forEach(function (blip) {
         const coordinates = findBlipCoordinates(blip,

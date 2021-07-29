@@ -277,6 +277,20 @@ h1, h2, h3, h4, h5 {
         font-size: $baseFont;
         margin: 0;
         font-weight: bold;
+
+        span {
+          background-color: $grey;
+          border-radius: 50%;
+          color: #fff;
+          cursor: pointer;
+          display: inline-block;
+          height: 14px;
+          width: 14px;
+          padding: 4px;
+          text-align: center;
+          margin-left: 12px;
+          line-height: 1;
+        }
       }
 
       &.first {
