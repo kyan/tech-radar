@@ -160,7 +160,7 @@ const Radar = function (size, radar) {
 
   function legendBlip (key, x, y, group) {
     const g = group.append('g')
-      .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
+      .attr('transform', 'scale(' + (52 / 64) + ') translate(' + (-404 + x * (64 / 52) - 17) + ', ' + (-322 + y * (64 / 52) - 17) + ')')
 
     BLIP_PATHS[key].forEach(function(path) {
       g.append('path').attr('d', path)
@@ -442,36 +442,36 @@ const Radar = function (size, radar) {
 
     container
       .append('text')
-      .attr('x', x + 15)
-      .attr('y', y + 5)
-      .attr('font-size', '0.8em')
+      .attr('x', x + 25)
+      .attr('y', y - 28)
+      .attr('font-size', '0.9em')
       .text(newKey)
 
-    movedInLegend(x, y + 20, container, order)
+    movedInLegend(x, y + 43, container, order)
 
     container
       .append('text')
-      .attr('x', x + 15)
-      .attr('y', y + 25)
-      .attr('font-size', '0.8em')
+      .attr('x', x + 25)
+      .attr('y', y + 14)
+      .attr('font-size', '0.9em')
       .text(movedInKey)
 
-    movedOutLegend(x, y + 40, container, order)
+    movedOutLegend(x, y + 80, container, order)
 
     container
       .append('text')
-      .attr('x', x + 15)
-      .attr('y', y + 45)
-      .attr('font-size', '0.8em')
+      .attr('x', x + 25)
+      .attr('y', y + 53)
+      .attr('font-size', '0.9em')
       .text(movedOutKey)
 
-    unchangedLegend(x, y + 60, container)
+    unchangedLegend(x, y + 120, container)
 
     container
       .append('text')
-      .attr('x', x + 15)
-      .attr('y', y + 65)
-      .attr('font-size', '0.8em')
+      .attr('x', x + 25)
+      .attr('y', y + 92)
+      .attr('font-size', '0.9em')
       .text(unchangedKey)
   }
 
