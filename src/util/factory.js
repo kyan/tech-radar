@@ -189,14 +189,14 @@ function plotLoadingMessage (content) {
   content.append('div')
     .attr('class', 'loading__wrap')
     .append('div')
-    .attr('class', 'loading__icon')
+    .attr('class', 'loading__logo')
     .html('<img src="/images/kyanWhite.svg" />')
 
   content.select('.loading__wrap')
     .append('div')
     .attr('class', 'loading__title')
     .append('h1')
-    .text('Tech Radar 2021')
+    .text('Tech Radar')
 }
 
 function plotErrorMessage (exception) {
