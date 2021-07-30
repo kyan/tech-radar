@@ -230,6 +230,8 @@ function plotErrorMessage (exception) {
     message = message.concat(exception.message)
   } else if (exception instanceof SheetNotFoundError) {
     message = exception.message
+  } else if (exception instanceof RangeError) {
+    message = "Your window is too small to render the data. Please enlarge the window size and refresh."
   } else {
     console.error(exception)
   }
