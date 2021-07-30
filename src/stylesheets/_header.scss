@@ -78,7 +78,7 @@ header {
   }
 
   .home-link {
-    color: $pink;
+    color: $kyan-primary;
     margin-bottom: 10px;
     line-height: normal;
     cursor: pointer;
@@ -105,8 +105,13 @@ header {
       text-transform: none;
     }
 
-    &:hover, &.selected {
-      background-color: lightern($black, 5%);
+    &:hover {
+      background-color: #444;
+      transform: translate(0,0);
+    }
+
+    &.selected {
+      background-color: $kyan-primary;
       transform: translate(0,0);
     }
   }

@@ -384,7 +384,7 @@ const Radar = function (size, radar) {
   function createHomeLink (pageElement) {
     if (pageElement.select('.home-link').empty()) {
       pageElement.insert('div', 'div#alternative-buttons')
-        .html('&#171; Back to Radar home')
+        .html('&#171; Back to full radar')
         .classed('home-link', true)
         .classed('selected', true)
         .on('click', redrawFullRadar)
@@ -563,7 +563,6 @@ const Radar = function (size, radar) {
       .append('ul')
       .attr('class', 'team-key__list')
 
-
     //Design team
     teamKey = header.select('.team-key__list')
       .append('li')
@@ -599,7 +598,6 @@ const Radar = function (size, radar) {
       .append('p')
       .attr('class', 'team-key__title')
       .text('Engineering')
-
 
     alternativeDiv = header.append('div')
       .attr('id', 'alternative-buttons')
@@ -712,6 +710,10 @@ const Radar = function (size, radar) {
   }
 
   function plotAlternativeRadars (alternatives, currentSheet) {
+    if (alternatives.length < 2) {
+      return
+    }
+
     var alternativeSheetButton = alternativeDiv
       .append('div')
       .classed('multiple-sheet-button-group', true)
