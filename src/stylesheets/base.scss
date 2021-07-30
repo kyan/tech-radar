@@ -259,12 +259,13 @@ a:hover {
         &.blip-text {
           font-size: 9px;
           fill: $white;
-          transform: translateX(-1px) translateY(-1px);
+          transform: translateX(-0.5px) translateY(-2px);
         }
 
         &.line-text {
           fill: $black;
           font-size: 14px;
+          text-transform: capitalize;
         }
       }
     }

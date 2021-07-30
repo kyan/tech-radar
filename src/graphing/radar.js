@@ -203,11 +203,14 @@ const Radar = function (size, radar) {
 
   function addRing (name, description, order) {
     var table = d3.select('.quadrant-table.' + order)
-    table.append('h3')
-      .text(name)
-      .append('span')
-      .attr('data-tippy-content', description)
-      .text('?')
+    var heading = table.append('h3').text(name)
+
+    if (description) {
+      heading.append('span')
+        .attr('data-tippy-content', description)
+        .text('?')
+    }
+
     return table.append('ul')
   }
 
@@ -218,7 +221,7 @@ const Radar = function (size, radar) {
     var radius = chance.floating({ min: minRadius + blip.width / 2, max: maxRadius - blip.width / 2 })
     var angleDelta = Math.asin(blip.width / 2 / radius) * 180 / Math.PI
     angleDelta = angleDelta > 45 ? 45 : angleDelta
-    var angle = toRadian(chance.integer({ min: angleDelta + 3, max: 90 - angleDelta - 3 }))
+    var angle = toRadian(chance.integer({ min: angleDelta + 2, max: 90 - angleDelta - 2 }))
 
     var x = center() + radius * Math.cos(angle) * adjustX
     var y = center() + radius * Math.sin(angle) * adjustY
@@ -330,7 +333,7 @@ const Radar = function (size, radar) {
       .attr('y', y + 4)
       .attr('class', 'blip-text')
       // derive font-size from current blip width
-      .style('font-size', ((blip.width * 10) / 22) + 'px')
+      .style('font-size', ((blip.width * 10) / 28) + 'px')
       .attr('text-anchor', 'middle')
       .text(blip.number())
 
@@ -415,12 +418,12 @@ const Radar = function (size, radar) {
 
     if (order === 'first') {
       x = 4 * size / 5
-      y = 1 * size / 5
+      y = 1 * size / 5 - 80
     }
 
     if (order === 'second') {
       x = 1 * size / 5 - 15
-      y = 1 * size / 5 - 20
+      y = 1 * size / 5 - 80
     }
 
     if (order === 'third') {
@@ -538,6 +541,8 @@ const Radar = function (size, radar) {
       .append('div')
       .attr('class', 'radar-title__logo')
       .html('<img src="/images/kyan.svg" />')
+      .style('cursor', 'pointer')
+      .on('click', redrawFullRadar)
 
     header.select('.radar-title')
       .append('div')
