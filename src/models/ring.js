@@ -2,11 +2,11 @@ const Ring = function (name, order) {
   var self = {}
 
   const DESCRIPTIONS = {
-    'Core': 'Core tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Adopt': 'Adopt tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Assess': 'Assess tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Trial': 'Trial tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Hold': 'Hold tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    'Core': "Central to the work we do at Kyan. Can be used on any project.",
+    'Adopt': "Under the right circumstances, we think this is ready for client projects.",
+    'Trial': "We've assessed this and think it's worth trialing on a small, low risk project. Internal projects are ideal.",
+    'Assess': "We're interested in understanding whether this is something worth trialing. A typical assessment might be a 'hello world' and a dev talk.",
+    'Hold': "It's likely we've found an alternative that we prefer for new projects, or there are concerns about whether this is right for Kyan."
   }
 
   self.name = function () {

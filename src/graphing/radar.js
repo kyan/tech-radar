@@ -550,7 +550,7 @@ const Radar = function (size, radar) {
     header.select('.radar-title')
       .append('p')
       .attr('class', 'radar-title__description')
-      .text('Libero, id proin eu nunc pulvinar nibh mus suspendisse in. Sollicitudin tristique turpis purus lacus, arcu non nec vivamus bibendum. Quam ornare nullam at pharetra, fringilla.')
+      .text("Whilst not exhaustive, this radar maps the current state of play for the technology and approaches we utilise at Kyan, and those that we are interested in exploring in the near future.")
 
     buttonsGroup = header.append('div')
       .classed('buttons-group', true)

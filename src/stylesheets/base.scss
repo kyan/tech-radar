@@ -24,7 +24,8 @@ h1, h2, h3, h4, h5 {
 
 a,
 a:active,
-a:visited {
+a:visited,
+a:hover {
   color: $kyan-primary;
   border-bottom: 1px solid $kyan-primary;
 }
