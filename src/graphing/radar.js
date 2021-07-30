@@ -54,12 +54,12 @@ const Radar = function (size, radar) {
     quadrantGroup.append('line')
       .attr('x1', center()).attr('x2', center())
       .attr('y1', startY - 2).attr('y2', endY + 2)
-      .attr('stroke-width', 10)
+      .attr('stroke-width', 30)
 
     quadrantGroup.append('line')
       .attr('x1', endX).attr('y1', center())
       .attr('x2', startX).attr('y2', center())
-      .attr('stroke-width', 10)
+      .attr('stroke-width', 30)
   }
 
   function plotQuadrant (rings, quadrant) {
@@ -218,7 +218,7 @@ const Radar = function (size, radar) {
     var radius = chance.floating({ min: minRadius + blip.width / 2, max: maxRadius - blip.width / 2 })
     var angleDelta = Math.asin(blip.width / 2 / radius) * 180 / Math.PI
     angleDelta = angleDelta > 45 ? 45 : angleDelta
-    var angle = toRadian(chance.integer({ min: angleDelta, max: 90 - angleDelta }))
+    var angle = toRadian(chance.integer({ min: angleDelta + 3, max: 90 - angleDelta - 3 }))
 
     var x = center() + radius * Math.cos(angle) * adjustX
     var y = center() + radius * Math.sin(angle) * adjustY
