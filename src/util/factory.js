@@ -191,19 +191,6 @@ function plotLogo (content) {
     .html('<a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" / ></a>')
 }
 
-function plotFooter (content) {
-  content
-    .append('div')
-    .attr('id', 'footer')
-    .append('div')
-    .attr('class', 'footer-content')
-    .append('p')
-    .html('Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. ' +
-      'By using this service you agree to <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks\' terms of use</a>. ' +
-      'You also agree to our <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather, use and protect any personal data contained in your public Google Sheet. ' +
-      'This software is <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and self-hosting.')
-}
-
 function plotLoadingMessage (content) {
   content.append('div')
     .attr('class', 'loading__wrap')
@@ -229,19 +216,23 @@ function plotErrorMessage (exception) {
 
   var content = d3.select('body')
     .append('div')
-    .attr('class', 'input-sheet')
+    .attr('class', 'error-page')
   setDocumentTitle()
 
-  plotLogo(content)
+  content.append('div')
+    .attr('class', 'error-page__wrap')
+    .append('div')
+    .attr('class', 'error-page__logo')
+    .html('<img src="/images/kyanWhite.svg" />')
 
-  var bannerText = '<div><h1>Build your own radar</h1><p>Once you\'ve <a href ="https://www.thoughtworks.com/radar/byor">created your Radar</a>, you can use this service' +
-    ' to generate an <br />interactive version of your Technology Radar. Not sure how? <a href ="https://www.thoughtworks.com/radar/how-to-byor">Read this first.</a></p></div>'
-
-  plotBanner(content, bannerText)
+  content.select('.error-page__wrap')
+    .append('div')
+    .attr('class', 'error-page__title')
+    .append('h1')
+    .text('Tech Radar')
 
   d3.selectAll('.loading').remove()
-  message = "Oops! We can't find the Google Sheet you've entered"
-  var faqMessage = 'Please check <a href="https://www.thoughtworks.com/radar/how-to-byor">FAQs</a> for possible solutions.'
+
   if (exception instanceof MalformedDataError) {
     message = message.concat(exception.message)
   } else if (exception instanceof SheetNotFoundError) {
@@ -255,8 +246,6 @@ function plotErrorMessage (exception) {
     .attr('class', 'error-container__message')
   errorContainer.append('div').append('p')
     .html(message)
-  errorContainer.append('div').append('p')
-    .html(faqMessage)
 
   var homePageURL = window.location.protocol + '//' + window.location.hostname
   homePageURL += (window.location.port === '' ? '' : ':' + window.location.port)
@@ -264,8 +253,6 @@ function plotErrorMessage (exception) {
 
   errorContainer.append('div').append('p')
     .html(homePage)
-
-  plotFooter(content)
 }
 
 function plotUnauthorizedErrorMessage () {
