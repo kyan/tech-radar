@@ -169,18 +169,12 @@ const GoogleSheetInput = function () {
   return self
 }
 
-function setDocumentTitle () {
-  document.title = 'Build your own Radar'
-}
-
 function plotLoading (content) {
   content = d3.select('body')
     .append('div')
     .attr('class', 'loading')
     .append('div')
     .attr('class', 'loading__wrap')
-
-  setDocumentTitle()
 
   plotLoadingMessage(content)
 }
@@ -217,7 +211,6 @@ function plotErrorMessage (exception) {
   var content = d3.select('body')
     .append('div')
     .attr('class', 'error-page')
-  setDocumentTitle()
 
   content.append('div')
     .attr('class', 'error-page__wrap')
@@ -259,7 +252,6 @@ function plotUnauthorizedErrorMessage () {
   var content = d3.select('body')
     .append('div')
     .attr('class', 'input-sheet')
-  setDocumentTitle()
 
   plotLogo(content)
 
