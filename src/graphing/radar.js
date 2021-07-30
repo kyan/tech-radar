@@ -757,8 +757,6 @@ const Radar = function (size, radar) {
       plotTexts(quadrantGroup, rings, quadrant)
       plotBlips(quadrantGroup, rings, quadrant)
     })
-
-    plotRadarFooter()
   }
 
   return self
