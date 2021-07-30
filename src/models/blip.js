@@ -1,4 +1,4 @@
-const IDEAL_BLIP_WIDTH = 22
+const IDEAL_BLIP_WIDTH = 28
 
 const STATUSES = {
   NEW: 'new',

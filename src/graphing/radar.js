@@ -105,82 +105,100 @@ const Radar = function (size, radar) {
     })
   }
 
-  //Circules
   const BLIP_PATHS = {
-    new: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    // TODO: modify the moved_in_N_quadrant & moved_out_N_quadrant paths to add the partial halos
-    moved_in_first_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_in_second_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_in_third_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_in_fourth_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_out_first_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_out_second_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_out_third_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-    moved_out_fourth_quadrant: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-
-    unchanged: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
+    new: [
+      'M433.6,297.4c0,7.4-6,13.5-13.5,13.5s-13.5-6-13.5-13.5c0-7.4,6-13.5,13.5-13.5S433.6,289.9,433.6,297.4z',
+      'M420.1,316.4c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19S430.6,316.4,420.1,316.4z M420.1,280.4c-9.4,0-17,7.6-17,17s7.6,17,17,17s17-7.6,17-17S429.5,280.4,420.1,280.4z'
+    ],
+    moved_in_first_quadrant: [
+      'M420.1,310.7c-7.4,0-13.5-6-13.5-13.5s6-13.5,13.5-13.5s13.5,6,13.5,13.5S427.6,310.7,420.1,310.7z',
+      'M401.2,297.2h2.2c0,9.2,7.5,16.9,16.9,16.9v2.2C409.6,316.2,401.2,307.6,401.2,297.2z'
+    ],
+    moved_in_second_quadrant: [
+      'M433.4,297.4c0,7.4-6,13.5-13.5,13.5c-7.4,0-13.5-6-13.5-13.5c0-7.4,6-13.5,13.5-13.5C427.4,283.9,433.4,289.9,433.4,297.4z',
+      'M420,316.3v-2.2c9.2,0,16.9-7.5,16.9-16.9h2.2C438.9,307.9,430.3,316.3,420,316.3z'
+    ],
+    moved_in_third_quadrant: [
+      'M420.3,283.8c7.4,0,13.5,6,13.5,13.5s-6,13.5-13.5,13.5c-7.4,0-13.5-6-13.5-13.5S412.8,283.8,420.3,283.8z',
+      'M439.2,297.2H437c0-9.2-7.5-16.9-16.9-16.9v-2.2C430.8,278.3,439.2,286.9,439.2,297.2z'
+    ],
+    moved_in_fourth_quadrant: [
+      'M406.7,297.2c0-7.4,6-13.5,13.5-13.5s13.5,6,13.5,13.5s-6,13.5-13.5,13.5S406.7,304.7,406.7,297.2z',
+      'M420.2,278.3v2.2c-9.2,0-16.9,7.5-16.9,16.9h-2.2C401.3,286.8,409.8,278.3,420.2,278.3z'
+    ],
+    moved_out_first_quadrant: [
+      'M420.3,283.8c7.4,0,13.5,6,13.5,13.5s-6,13.5-13.5,13.5c-7.4,0-13.5-6-13.5-13.5S412.8,283.8,420.3,283.8z',
+      'M439.2,297.2H437c0-9.2-7.5-16.9-16.9-16.9v-2.2C430.8,278.3,439.2,286.9,439.2,297.2z'
+    ],
+    moved_out_second_quadrant: [
+      'M406.7,297.2c0-7.4,6-13.5,13.5-13.5s13.5,6,13.5,13.5s-6,13.5-13.5,13.5S406.7,304.7,406.7,297.2z',
+      'M420.2,278.3v2.2c-9.2,0-16.9,7.5-16.9,16.9h-2.2C401.3,286.8,409.8,278.3,420.2,278.3z'
+    ],
+    moved_out_third_quadrant: [
+      'M420.1,310.7c-7.4,0-13.5-6-13.5-13.5s6-13.5,13.5-13.5s13.5,6,13.5,13.5S427.6,310.7,420.1,310.7z',
+      'M401.2,297.2h2.2c0,9.2,7.5,16.9,16.9,16.9v2.2C409.6,316.2,401.2,307.6,401.2,297.2z'
+    ],
+    moved_out_fourth_quadrant: [
+      'M433.4,297.4c0,7.4-6,13.5-13.5,13.5c-7.4,0-13.5-6-13.5-13.5c0-7.4,6-13.5,13.5-13.5C427.4,283.9,433.4,289.9,433.4,297.4z',
+      'M420,316.3v-2.2c9.2,0,16.9-7.5,16.9-16.9h2.2C438.9,307.9,430.3,316.3,420,316.3z'
+    ],
+    unchanged: [
+      'M433.6,297.4c0,7.4-6,13.5-13.5,13.5s-13.5-6-13.5-13.5c0-7.4,6-13.5,13.5-13.5S433.6,289.9,433.6,297.4z',
+    ],
   }
 
-  //Different shapes
-  // const BLIP_PATHS = {
-  //   new: 'M434.5,297.5c0,7.5-6.1,13.7-13.7,13.7c-7.5,0-13.7-6.1-13.7-13.7c0-7.5,6.1-13.6,13.7-13.6C428.4,283.9,434.5,290,434.5,297.5z',
-  //   // TODO: modify the moved_in_N_quadrant & moved_out_N_quadrant paths to add the partial halos
-  //   moved_in_first_quadrant: 'M421,284l-14.1,10.2c-0.1,0.1-0.1,0.2-0.1,0.3l5.4,16.5c0,0.1,0.1,0.2,0.2,0.2h17.4c0.1,0,0.2-0.1,0.2-0.2l5.4-16.5c0-0.1,0-0.2-0.1-0.3L421.2,284C421.2,283.9,421,283.9,421,284z',
-  //   moved_in_second_quadrant: 'M421,284l-14.1,10.2c-0.1,0.1-0.1,0.2-0.1,0.3l5.4,16.5c0,0.1,0.1,0.2,0.2,0.2h17.4c0.1,0,0.2-0.1,0.2-0.2l5.4-16.5c0-0.1,0-0.2-0.1-0.3L421.2,284C421.2,283.9,421,283.9,421,284z',
-  //   moved_in_third_quadrant: 'M421,284l-14.1,10.2c-0.1,0.1-0.1,0.2-0.1,0.3l5.4,16.5c0,0.1,0.1,0.2,0.2,0.2h17.4c0.1,0,0.2-0.1,0.2-0.2l5.4-16.5c0-0.1,0-0.2-0.1-0.3L421.2,284C421.2,283.9,421,283.9,421,284z',
-  //   moved_in_fourth_quadrant: 'M421,284l-14.1,10.2c-0.1,0.1-0.1,0.2-0.1,0.3l5.4,16.5c0,0.1,0.1,0.2,0.2,0.2h17.4c0.1,0,0.2-0.1,0.2-0.2l5.4-16.5c0-0.1,0-0.2-0.1-0.3L421.2,284C421.2,283.9,421,283.9,421,284z',
-  //   moved_out_first_quadrant: 'M421,311.1l14.1-10.2c0.1-0.1,0.1-0.2,0.1-0.3l-5.4-16.5c0-0.1-0.1-0.2-0.2-0.2h-17.4c-0.1,0-0.2,0.1-0.2,0.2l-5.4,16.5c0,0.1,0,0.2,0.1,0.3l14.1,10.2C420.8,311.2,420.9,311.2,421,311.1z',
-  //   moved_out_second_quadrant: 'M421,311.1l14.1-10.2c0.1-0.1,0.1-0.2,0.1-0.3l-5.4-16.5c0-0.1-0.1-0.2-0.2-0.2h-17.4c-0.1,0-0.2,0.1-0.2,0.2l-5.4,16.5c0,0.1,0,0.2,0.1,0.3l14.1,10.2C420.8,311.2,420.9,311.2,421,311.1z',
-  //   moved_out_third_quadrant: 'M421,311.1l14.1-10.2c0.1-0.1,0.1-0.2,0.1-0.3l-5.4-16.5c0-0.1-0.1-0.2-0.2-0.2h-17.4c-0.1,0-0.2,0.1-0.2,0.2l-5.4,16.5c0,0.1,0,0.2,0.1,0.3l14.1,10.2C420.8,311.2,420.9,311.2,421,311.1z',
-  //   moved_out_fourth_quadrant: 'M421,311.1l14.1-10.2c0.1-0.1,0.1-0.2,0.1-0.3l-5.4-16.5c0-0.1-0.1-0.2-0.2-0.2h-17.4c-0.1,0-0.2,0.1-0.2,0.2l-5.4,16.5c0,0.1,0,0.2,0.1,0.3l14.1,10.2C420.8,311.2,420.9,311.2,421,311.1z',
+  function radarBlip (key, blip, x, y, order, group) {
+    const g = group.append('g')
+      .attr('transform', 'scale(' + (blip.width / 34) + ') translate(' + (-404 + x * (34 / blip.width) - 17) + ', ' + (-282 + y * (34 / blip.width) - 17) + ')')
 
-  //   unchanged: 'M434.4,311.2h-27c-0.1,0-0.1-0.1-0.1-0.1V284c0-0.1,0.1-0.1,0.1-0.1h27c0.1,0,0.1,0.1,0.1,0.1v27.1C434.5,311.1,434.4,311.2,434.4,311.2z',
-  // }
+    BLIP_PATHS[key].forEach(function(path) {
+      g.append('path').attr('d', path).attr('class', blip.department)
+    })
+
+    return group
+  }
+
+  function legendBlip (key, x, y, group) {
+    const g = group.append('g')
+      .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
+
+    BLIP_PATHS[key].forEach(function(path) {
+      g.append('path').attr('d', path)
+    })
+
+    return group
+  }
 
   function newBlip (blip, x, y, order, group) {
-    return group.append('path').attr('d', BLIP_PATHS.new)
-      .attr('transform', 'scale(' + (blip.width / 34) + ') translate(' + (-404 + x * (34 / blip.width) - 17) + ', ' + (-282 + y * (34 / blip.width) - 17) + ')')
-      .attr('class', blip.department)
+    return radarBlip('new', blip, x, y, order, group)
   }
 
   function newLegend (x, y, group) {
-    return group.append('path').attr('d', BLIP_PATHS.new)
-      .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
+    return legendBlip('new', x, y, group)
   }
 
   function movedInBlip (blip, x, y, order, group) {
-    return group.append('path').attr('d', BLIP_PATHS['moved_in_' + order + '_quadrant'])
-      .attr('transform', 'scale(' + (blip.width / 34) + ') translate(' + (-404 + x * (34 / blip.width) - 17) + ', ' + (-282 + y * (34 / blip.width) - 17) + ')')
-      .attr('class', blip.department)
+    return radarBlip('moved_in_' + order + '_quadrant', blip, x, y, order, group)
   }
 
   function movedInLegend (x, y, group, order) {
-    return group.append('path').attr('d', BLIP_PATHS['moved_in_' + order + '_quadrant'])
-      .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
+    return legendBlip('moved_in_' + order + '_quadrant', x, y, group)
   }
 
   function movedOutBlip (blip, x, y, order, group) {
-    return group.append('path').attr('d', BLIP_PATHS['moved_out_' + order + '_quadrant'])
-      .attr('transform', 'scale(' + (blip.width / 34) + ') translate(' + (-404 + x * (34 / blip.width) - 17) + ', ' + (-282 + y * (34 / blip.width) - 17) + ')')
-      .attr('class', blip.department)
+    return radarBlip('moved_out_' + order + '_quadrant', blip, x, y, order, group)
   }
 
   function movedOutLegend (x, y, group, order) {
-    return group.append('path').attr('d', BLIP_PATHS['moved_out_' + order + '_quadrant'])
-      .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
+    return legendBlip('moved_out_' + order + '_quadrant', x, y, group)
   }
 
   function unchangedBlip (blip, x, y, order, group) {
-    return (group || svg).append('path')
-      .attr('d', BLIP_PATHS.unchanged)
-      .attr('transform', 'scale(' + (blip.width / 34) + ') translate(' + (-404 + x * (34 / blip.width) - 17) + ', ' + (-282 + y * (34 / blip.width) - 17) + ')')
-      .attr('class', blip.department)
+    return radarBlip('unchanged', blip, x, y, order, group)
   }
 
   function unchangedLegend (x, y, group) {
-    return (group || svg).append('path')
-      .attr('d', 'M420.084,282.092c-1.073,0-2.16,0.103-3.243,0.313c-6.912,1.345-13.188,8.587-11.423,16.874c1.732,8.141,8.632,13.711,17.806,13.711c0.025,0,0.052,0,0.074-0.003c0.551-0.025,1.395-0.011,2.225-0.109c4.404-0.534,8.148-2.218,10.069-6.487c1.747-3.886,2.114-7.993,0.913-12.118C434.379,286.944,427.494,282.092,420.084,282.092')
-      .attr('transform', 'scale(' + (22 / 64) + ') translate(' + (-404 + x * (64 / 22) - 17) + ', ' + (-282 + y * (64 / 22) - 17) + ')')
+    return legendBlip('unchanged', x, y, group)
   }
 
   function addRing (name, description, order) {
