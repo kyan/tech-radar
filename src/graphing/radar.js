@@ -54,12 +54,12 @@ const Radar = function (size, radar) {
     quadrantGroup.append('line')
       .attr('x1', center()).attr('x2', center())
       .attr('y1', startY - 2).attr('y2', endY + 2)
-      .attr('stroke-width', 30)
+      .attr('stroke-width', 20)
 
     quadrantGroup.append('line')
       .attr('x1', endX).attr('y1', center())
       .attr('x2', startX).attr('y2', center())
-      .attr('stroke-width', 30)
+      .attr('stroke-width', 20)
   }
 
   function plotQuadrant (rings, quadrant) {
@@ -221,7 +221,13 @@ const Radar = function (size, radar) {
     var radius = chance.floating({ min: minRadius + blip.width / 2, max: maxRadius - blip.width / 2 })
     var angleDelta = Math.asin(blip.width / 2 / radius) * 180 / Math.PI
     angleDelta = angleDelta > 45 ? 45 : angleDelta
-    var angle = toRadian(chance.integer({ min: angleDelta + 2, max: 90 - angleDelta - 2 }))
+    var padding = 2;
+    var minAngleDelta = angleDelta + padding
+    var maxAngleDelta = 90 - angleDelta - padding
+    var angle = toRadian(chance.integer({
+      min: Math.min(minAngleDelta, maxAngleDelta),
+      max: Math.max(minAngleDelta, maxAngleDelta)
+    }))
 
     var x = center() + radius * Math.cos(angle) * adjustX
     var y = center() + radius * Math.sin(angle) * adjustY
@@ -715,10 +721,6 @@ const Radar = function (size, radar) {
   }
 
   function plotAlternativeRadars (alternatives, currentSheet) {
-    if (alternatives.length < 2) {
-      return
-    }
-
     var alternativeSheetButton = alternativeDiv
       .append('div')
       .classed('multiple-sheet-button-group', true)
@@ -748,7 +750,7 @@ const Radar = function (size, radar) {
     currentSheet = radar.getCurrentSheet()
     var header = plotRadarHeader()
 
-    if (alternatives.length) {
+    if (alternatives.length > 1) {
       plotAlternativeRadars(alternatives, currentSheet)
     }
 
