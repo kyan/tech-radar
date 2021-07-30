@@ -8,10 +8,10 @@ describe('Quadrant', function () {
     expect(quadrant.name()).toEqual('My Quadrant')
   })
 
-  it('replaces hyphesn in name', function () {
-    var quadrant = new Quadrant('My-Quadrant')
+  it('humanises the name', function () {
+    var quadrant = new Quadrant('My-Quadrant-and-Foo')
 
-    expect(quadrant.name()).toEqual('My Quadrant')
+    expect(quadrant.name()).toEqual('My Quadrant & Foo')
   })
 
   it('has no blips by default', function () {

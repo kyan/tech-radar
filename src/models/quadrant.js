@@ -5,7 +5,7 @@ const Quadrant = function (name) {
   blips = []
 
   self.name = function () {
-    return name.replace(/-/g, ' ')
+    return name.replace(/-/g, ' ').replace(/\sand\s/g, ' & ')
   }
 
   self.add = function (newBlips) {
