@@ -76,7 +76,6 @@ const GoogleSheet = function (sheetReference, sheetName) {
   self.build = function () {
     Papa.parse(
       `${sheetReference}/pub?output=csv`,
-      // `https://docs.google.com/spreadsheets/d/1Qle0jpHR81-GHH_FPU2uCkdxYRZfFGjBY5ac0/pub?output=csv`,
       {
         download: true,
         header: true,
@@ -84,8 +83,6 @@ const GoogleSheet = function (sheetReference, sheetName) {
         error: handleSheetError,
       }
     );
-
-    // self.authenticate(false)
 
     function handleSheetError () {
       plotErrorMessage(new SheetNotFoundError(ExceptionMessages.SHEET_NOT_FOUND))
