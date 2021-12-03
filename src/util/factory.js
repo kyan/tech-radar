@@ -1,7 +1,6 @@
 /* eslint no-constant-condition: "off" */
 
 const d3 = require('d3')
-const Tabletop = require('tabletop')
 const _ = {
   map: require('lodash/map'),
   uniqBy: require('lodash/uniqBy'),
@@ -78,10 +77,14 @@ const GoogleSheet = function (sheetReference, sheetName) {
     var sheet = new Sheet(sheetReference)
     sheet.validate(function (error) {
       if (!error) {
-        Tabletop.init({
-          key: sheet.id,
-          callback: createBlips
-        })
+        Papa.parse(
+          "https://docs.google.com/spreadsheets/d/1Qle0jpHR81-GHH_FPU2uCkdxYRZfFGjBY5aCTg36Lc0/pub?output=csv",
+          {
+            download: true,
+            header: true,
+            complete: createBlips,
+          }
+        );
         return
       }
 
@@ -93,21 +96,21 @@ const GoogleSheet = function (sheetReference, sheetName) {
       self.authenticate(false)
     })
 
-    function createBlips (__, tabletop) {
+    function createBlips (results) {
       try {
         if (!sheetName) {
-          sheetName = tabletop.foundSheetNames[0]
+          sheetName = 'Tech Radar'
         }
-        var columnNames = tabletop.sheets(sheetName).columnNames
+        var columnNames = results.meta.fields
 
         var contentValidator = new ContentValidator(columnNames)
         contentValidator.verifyContent()
         contentValidator.verifyHeaders()
 
-        var all = tabletop.sheets(sheetName).all()
+        var all = results.data
         var blips = _.map(all, new InputSanitizer().sanitize)
 
-        plotRadar(tabletop.googleSheetName + ' - ' + sheetName, blips, sheetName, tabletop.foundSheetNames)
+        plotRadar(sheetName, blips, sheetName, [])
       } catch (exception) {
         plotErrorMessage(exception)
       }
