@@ -11,30 +11,6 @@ const Sheet = function (sheetReference) {
     self.id = matches !== null ? matches[1] : sheetReference
   })()
 
-  self.validate = function (callback) {
-    // TODO: Fix Validation
-    return callback();
-
-    var enableGoogleAuth = process.env.ENABLE_GOOGLE_AUTH || false
-    var feedURL = enableGoogleAuth ? 'https://sheets.googleapis.com/v4/spreadsheets/' + self.id + '?key=' + process.env.API_KEY : 'https://spreadsheets.google.com/feeds/worksheets/' + self.id + '/public/basic?alt=json'
-
-    // TODO: Move this out (as HTTPClient)
-    var xhr = new XMLHttpRequest()
-    xhr.open('GET', feedURL, true)
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          return callback()
-        } else if (xhr.status === 404) {
-          return callback(new SheetNotFoundError(ExceptionMessages.SHEET_NOT_FOUND))
-        } else {
-          return callback(new UnauthorizedError(ExceptionMessages.UNAUTHORIZED))
-        }
-      }
-    }
-    xhr.send(null)
-  }
-
   self.getSheet = function () {
     return gapi.client.sheets.spreadsheets.get({ spreadsheetId: self.id })
   }
