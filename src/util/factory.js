@@ -22,7 +22,7 @@ const Sheet = require('./sheet')
 const ExceptionMessages = require('./exceptionMessages')
 const GoogleAuth = require('./googleAuth')
 
-const sheetUrl = 'https://docs.google.com/spreadsheets/d/1zlxGZkmyFkxjH71HwsbRZ4WCrGCia2uj5W3orc8ewyg';
+const sheetUrl = 'https://docs.google.com/spreadsheets/d/1Qle0jpHR81-GHH_FPU2uCkdxYRZfFGjBY5aCTg36Lc0';
 
 const plotRadar = function (title, blips, currentRadarName, alternativeRadars) {
   if (title.endsWith('.csv')) {
@@ -74,27 +74,23 @@ const GoogleSheet = function (sheetReference, sheetName) {
   var self = {}
 
   self.build = function () {
-    var sheet = new Sheet(sheetReference)
-    sheet.validate(function (error) {
-      if (!error) {
-        Papa.parse(
-          "https://docs.google.com/spreadsheets/d/1Qle0jpHR81-GHH_FPU2uCkdxYRZfFGjBY5aCTg36Lc0/pub?output=csv",
-          {
-            download: true,
-            header: true,
-            complete: createBlips,
-          }
-        );
-        return
+    Papa.parse(
+      `${sheetReference}/pub?output=csv`,
+      // `https://docs.google.com/spreadsheets/d/1Qle0jpHR81-GHH_FPU2uCkdxYRZfFGjBY5ac0/pub?output=csv`,
+      {
+        download: true,
+        header: true,
+        complete: createBlips,
+        error: handleSheetError,
       }
+    );
 
-      if (error instanceof SheetNotFoundError) {
-        plotErrorMessage(error)
-        return
-      }
+    // self.authenticate(false)
 
-      self.authenticate(false)
-    })
+    function handleSheetError () {
+      plotErrorMessage(new SheetNotFoundError(ExceptionMessages.SHEET_NOT_FOUND))
+      return
+    }
 
     function createBlips (results) {
       try {
