@@ -23,7 +23,7 @@ const ExceptionMessages = require('./exceptionMessages')
 const GoogleAuth = require('./googleAuth')
 const Papa = require("papaparse");
 
-const sheetUrl = 'https://docs.google.com/spreadsheets/d/1Qle0jpHR81-GHH_FPU2uCkdxYRZfFGjBY5aCTg36Lc0';
+const sheetUrl = 'https://docs.google.com/spreadsheets/d/1zlxGZkmyFkxjH71HwsbRZ4WCrGCia2uj5W3orc8ewyg';
 
 const plotRadar = function (title, blips, currentRadarName, alternativeRadars) {
   if (title.endsWith('.csv')) {
