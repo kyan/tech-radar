@@ -21,7 +21,6 @@ const ContentValidator = require('./contentValidator')
 const Sheet = require('./sheet')
 const ExceptionMessages = require('./exceptionMessages')
 const GoogleAuth = require('./googleAuth')
-const Papa = require("papaparse");
 
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/1zlxGZkmyFkxjH71HwsbRZ4WCrGCia2uj5W3orc8ewyg';
 
@@ -75,40 +74,45 @@ const GoogleSheet = function (sheetReference, sheetName) {
   var self = {}
 
   self.build = function () {
-    Papa.parse(
-      `${sheetReference}/pub?output=csv`,
-      {
-        download: true,
-        header: true,
-        complete: createBlips,
-        error: handleSheetError,
-      }
-    );
+    const sheet = Sheet(sheetReference);
+
+    sheet.processSheetResponse(sheetName, createBlips, handleSheetError);
 
     function handleSheetError () {
       plotErrorMessage(new SheetNotFoundError(ExceptionMessages.SHEET_NOT_FOUND))
       return
     }
 
-    function createBlips (results) {
+    function createBlips (sheetName, values, sheetNames = []) {
       try {
         if (!sheetName) {
           sheetName = 'Tech Radar'
         }
-        var columnNames = results.meta.fields
+
+        const columnNames = values[0];
 
         var contentValidator = new ContentValidator(columnNames)
         contentValidator.verifyContent()
         contentValidator.verifyHeaders()
 
-        var all = results.data
-        var blips = _.map(all, new InputSanitizer().sanitize)
+        const blips = values.slice(1)
+          .map((row) => new InputSanitizer().sanitize(mapValuesRow(row)));
 
-        plotRadar(sheetName, blips, sheetName, [])
+        plotRadar(sheetName, blips, sheetName, sheetNames)
       } catch (exception) {
         plotErrorMessage(exception)
       }
     }
+  }
+
+  function mapValuesRow([name, ring, quadrant, department, status]) {
+    return {
+      name,
+      ring,
+      quadrant,
+      department,
+      status,
+    };
   }
 
   function createBlipsForProtectedSheet (documentTitle, values, sheetNames) {
