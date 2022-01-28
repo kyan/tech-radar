@@ -12,18 +12,19 @@ const cssnano = require('cssnano')
 
 const isProd = args.prod
 const isDev = args.dev
-const env = args.envFile
-if (env) {
+
+if (process.env.NODE_ENV !== 'production') {
   // Load env file
-  require('dotenv').config({ path: env })
+  require('dotenv').config();
 }
 
 const main = ['./src/site.js']
 const common = ['./src/common.js']
+const serverPort = process.env.PORT || 8080;
 let devtool
 
 if (isDev) {
-  main.push('webpack-dev-server/client?http://0.0.0.0:8080')
+  main.push(`webpack-dev-server/client?http://0.0.0.0:${serverPort}`)
   devtool = 'source-map'
 }
 
@@ -116,6 +117,6 @@ module.exports = {
   devServer: {
     contentBase: buildPath,
     host: '0.0.0.0',
-    port: 8080
+    port: serverPort,
   }
 }
