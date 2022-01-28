@@ -2,7 +2,6 @@
 const d3 = require('d3')
 
 // Client ID and API key from the Developer Console
-var CLIENT_ID = process.env.CLIENT_ID
 var API_KEY = process.env.API_KEY
 
 // Array of API discovery doc URLs for APIs used by the quickstart
@@ -65,7 +64,6 @@ const GoogleAuth = function () {
   self.initClient = function () {
     gapi.client.init({
       apiKey: API_KEY,
-      clientId: CLIENT_ID,
       discoveryDocs: DISCOVERY_DOCS,
       scope: SCOPES
     }).then(function () {
