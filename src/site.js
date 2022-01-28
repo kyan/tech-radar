@@ -6,5 +6,8 @@ require('./images/radar_legend.png')
 require('./gtm.js')
 
 const GoogleSheetInput = require('./util/factory')
+const GoogleClient = require('./util/googleAuth');
 
-GoogleSheetInput().build()
+GoogleClient.loadGoogle(() => {
+  GoogleSheetInput().build();
+});
