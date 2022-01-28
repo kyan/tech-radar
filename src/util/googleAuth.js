@@ -65,14 +65,19 @@ const GoogleAuth = function () {
     gapi.client.init({
       apiKey: API_KEY,
       discoveryDocs: DISCOVERY_DOCS,
-      scope: SCOPES
+      scope: SCOPES,
     }).then(function () {
-      self.loadedCallback()
-      // Listen for sign-in state changes.
-      gapi.auth2.getAuthInstance().isSignedIn.listen(function (data) { self.updateSigninStatus(data) })
+      self.loadedCallback();
 
-      // Handle the initial sign-in state.
-      self.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
+      const authInstance = gapi.auth2.getAuthInstance();
+
+      if (authInstance) {
+        // Listen for sign-in state changes.
+        authInstance.isSignedIn.listen(function (data) { self.updateSigninStatus(data) });
+
+        // Handle the initial sign-in state.
+        self.updateSigninStatus(authInstance.isSignedIn.get());
+      }
     })
   }
 
