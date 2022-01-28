@@ -54,4 +54,4 @@ Runs the full test suite.
 
 The data is pulled from a the [Kyan Tech Radar](https://docs.google.com/spreadsheets/d/1zlxGZkmyFkxjH71HwsbRZ4WCrGCia2uj5W3orc8ewyg) google sheet.
 
-If you need to work from a different sheet for development purposes, first make a copy of the sheet, then publish to the web, then update the `sheetUrl` variable in [`src/util/factory.js](./src/util/factory.js).
+If you need to work from a different sheet for development purposes, first make a copy of the sheet, then publish to the web, then update the `sheetUrl` variable in [`src/util/factory.js`](./src/util/factory.js).
