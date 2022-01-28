@@ -7,8 +7,11 @@ dist
 
 coverage/
 
+.env
+.env.local
 .idea/
 .DS_Store
+.vscode/
 
 spec/end_to_end_tests/reports/
 cypress/
