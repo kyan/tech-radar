@@ -14,6 +14,7 @@ build:
 	docker-compose build
 
 setup:
+	cp -n .env.sample .env
 
 serve:
 	docker-compose up
