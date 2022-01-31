@@ -95,6 +95,11 @@ const GoogleAuth = function () {
   }
 
   self.login = function (callback, force = false) {
+    if (CLIENT_ID === undefined) {
+      callback();
+      return;
+    }
+
     if (force) {
       gapi.auth2.getAuthInstance().signIn({ prompt: 'select_account' }).then(callback)
       return

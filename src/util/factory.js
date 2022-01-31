@@ -74,61 +74,28 @@ const GoogleSheet = function (sheetReference, sheetName) {
   var self = {}
 
   self.build = function () {
-    const sheet = Sheet(sheetReference);
-
-    sheet.processSheetResponse(sheetName, createBlips, handleSheetError);
-
-    function handleSheetError () {
-      plotErrorMessage(new SheetNotFoundError(ExceptionMessages.SHEET_NOT_FOUND))
-      return
-    }
-
-    function createBlips (sheetName, values, sheetNames = []) {
-      try {
-        if (!sheetName) {
-          sheetName = 'Tech Radar'
-        }
-
-        const columnNames = values[0];
-
-        var contentValidator = new ContentValidator(columnNames)
-        contentValidator.verifyContent()
-        contentValidator.verifyHeaders()
-
-        const blips = values.slice(1)
-          .map((row) => new InputSanitizer().sanitize(mapValuesRow(row)));
-
-        plotRadar(sheetName, blips, sheetName, sheetNames)
-      } catch (exception) {
-        plotErrorMessage(exception)
-      }
-    }
-  }
-
-  function mapValuesRow([name, ring, quadrant, department, status]) {
-    return {
-      name,
-      ring,
-      quadrant,
-      department,
-      status,
-    };
+    self.authenticate();
   }
 
   function createBlipsForProtectedSheet (documentTitle, values, sheetNames) {
     if (!sheetName) {
       sheetName = sheetNames[0]
     }
-    values.forEach(function (value) {
-      var contentValidator = new ContentValidator(values[0])
-      contentValidator.verifyContent()
-      contentValidator.verifyHeaders()
-    })
 
-    const all = values
-    const header = all.shift()
-    var blips = _.map(all, blip => new InputSanitizer().sanitizeForProtectedSheet(blip, header))
-    plotRadar(documentTitle + ' - ' + sheetName, blips, sheetName, sheetNames)
+    try {
+      values.forEach(function (value) {
+        var contentValidator = new ContentValidator(values[0])
+        contentValidator.verifyContent()
+        contentValidator.verifyHeaders()
+      })
+
+      const all = values
+      const header = all.shift()
+      var blips = _.map(all, blip => new InputSanitizer().sanitizeForProtectedSheet(blip, header))
+      plotRadar(documentTitle + ' - ' + sheetName, blips, sheetName, sheetNames)
+    } catch (exception) {
+      plotErrorMessage(exception)
+    }
   }
 
   self.authenticate = function (force = false, callback) {
