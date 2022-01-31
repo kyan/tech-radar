@@ -22,7 +22,7 @@ const Sheet = require('./sheet')
 const ExceptionMessages = require('./exceptionMessages')
 const GoogleAuth = require('./googleAuth')
 
-const sheetUrl = 'https://docs.google.com/spreadsheets/d/1zlxGZkmyFkxjH71HwsbRZ4WCrGCia2uj5W3orc8ewyg';
+const sheetUrl = `https://docs.google.com/spreadsheets/d/${process.env.SHEET_ID}`;
 
 const plotRadar = function (title, blips, currentRadarName, alternativeRadars) {
   if (title.endsWith('.csv')) {
