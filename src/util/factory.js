@@ -83,18 +83,18 @@ const GoogleSheet = function (sheetReference, sheetName) {
     }
 
     try {
-      values.forEach(function (value) {
-        var contentValidator = new ContentValidator(values[0])
-        contentValidator.verifyContent()
-        contentValidator.verifyHeaders()
-      })
+      const columnNames = values[0];
 
-      const all = values
-      const header = all.shift()
-      var blips = _.map(all, blip => new InputSanitizer().sanitizeForProtectedSheet(blip, header))
-      plotRadar(documentTitle + ' - ' + sheetName, blips, sheetName, sheetNames)
+      var contentValidator = new ContentValidator(columnNames);
+      contentValidator.verifyContent();
+      contentValidator.verifyHeaders();
+
+      const all = values;
+      const header = all.shift();
+      var blips = _.map(all, blip => new InputSanitizer().sanitizeForProtectedSheet(blip, header));
+      plotRadar(documentTitle + ' - ' + sheetName, blips, sheetName, sheetNames);
     } catch (exception) {
-      plotErrorMessage(exception)
+      plotErrorMessage(exception);
     }
   }
 
