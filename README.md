@@ -11,6 +11,10 @@ The Kyan Tech Radar, forked from [thoughtworks/build-your-own-radar](https://git
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Make](http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/)
 
+### Environment Variables
+
+You can find some predefined environment variables in `.env.sample`.
+
 ### Setup
 
 Clone the project from [https://github.com/kyan/tech-radar](https://github.com/kyan/tech-radar).

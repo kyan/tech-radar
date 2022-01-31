@@ -27,9 +27,12 @@ const Sheet = function (sheetReference) {
   }
 
   function processSheetData (sheetName, sheetResponse, createBlips, handleError) {
-    const sheetNames = sheetResponse.result.sheets.map(s => s.properties.title)
+    const sheetNames = sheetResponse.result.sheets
+      .filter((sheet) => !sheet.properties.title.startsWith('_'))
+      .map((sheet) => sheet.properties.title);
+
     sheetName = !sheetName ? sheetNames[0] : sheetName
-    self.getData(sheetName + '!A1:E')
+    self.getData(sheetName + '!A1:F')
       .then(r => createBlips(sheetResponse.result.properties.title, r.result.values, sheetNames))
       .catch(handleError)
   }

@@ -21,9 +21,8 @@ const ContentValidator = require('./contentValidator')
 const Sheet = require('./sheet')
 const ExceptionMessages = require('./exceptionMessages')
 const GoogleAuth = require('./googleAuth')
-const Papa = require("papaparse");
 
-const sheetUrl = 'https://docs.google.com/spreadsheets/d/1zlxGZkmyFkxjH71HwsbRZ4WCrGCia2uj5W3orc8ewyg';
+const sheetUrl = `https://docs.google.com/spreadsheets/d/${process.env.SHEET_ID}`;
 
 const plotRadar = function (title, blips, currentRadarName, alternativeRadars) {
   if (title.endsWith('.csv')) {
@@ -75,56 +74,28 @@ const GoogleSheet = function (sheetReference, sheetName) {
   var self = {}
 
   self.build = function () {
-    Papa.parse(
-      `${sheetReference}/pub?output=csv`,
-      {
-        download: true,
-        header: true,
-        complete: createBlips,
-        error: handleSheetError,
-      }
-    );
-
-    function handleSheetError () {
-      plotErrorMessage(new SheetNotFoundError(ExceptionMessages.SHEET_NOT_FOUND))
-      return
-    }
-
-    function createBlips (results) {
-      try {
-        if (!sheetName) {
-          sheetName = 'Tech Radar'
-        }
-        var columnNames = results.meta.fields
-
-        var contentValidator = new ContentValidator(columnNames)
-        contentValidator.verifyContent()
-        contentValidator.verifyHeaders()
-
-        var all = results.data
-        var blips = _.map(all, new InputSanitizer().sanitize)
-
-        plotRadar(sheetName, blips, sheetName, [])
-      } catch (exception) {
-        plotErrorMessage(exception)
-      }
-    }
+    self.authenticate();
   }
 
   function createBlipsForProtectedSheet (documentTitle, values, sheetNames) {
     if (!sheetName) {
       sheetName = sheetNames[0]
     }
-    values.forEach(function (value) {
-      var contentValidator = new ContentValidator(values[0])
-      contentValidator.verifyContent()
-      contentValidator.verifyHeaders()
-    })
 
-    const all = values
-    const header = all.shift()
-    var blips = _.map(all, blip => new InputSanitizer().sanitizeForProtectedSheet(blip, header))
-    plotRadar(documentTitle + ' - ' + sheetName, blips, sheetName, sheetNames)
+    try {
+      const columnNames = values[0];
+
+      var contentValidator = new ContentValidator(columnNames);
+      contentValidator.verifyContent();
+      contentValidator.verifyHeaders();
+
+      const all = values;
+      const header = all.shift();
+      var blips = _.map(all, blip => new InputSanitizer().sanitizeForProtectedSheet(blip, header));
+      plotRadar(documentTitle + ' - ' + sheetName, blips, sheetName, sheetNames);
+    } catch (exception) {
+      plotErrorMessage(exception);
+    }
   }
 
   self.authenticate = function (force = false, callback) {

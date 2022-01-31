@@ -12,8 +12,15 @@ var DISCOVERY_DOCS = ['https://sheets.googleapis.com/$discovery/rest?version=v4'
 // included, separated by spaces.
 var SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
+const AUTH_MODES = {
+  API_KEY: 'API_KEY',
+  OAUTH: 'OAUTH',
+};
+
 const GoogleAuth = function () {
-  const self = {}
+  const self = {
+    authMode: AUTH_MODES.API_KEY,
+  };
   self.isAuthorizedCallbacks = []
   self.isLoggedIn = undefined
 
@@ -69,12 +76,17 @@ const GoogleAuth = function () {
       discoveryDocs: DISCOVERY_DOCS,
       scope: SCOPES
     }).then(function () {
-      self.loadedCallback()
-      // Listen for sign-in state changes.
-      gapi.auth2.getAuthInstance().isSignedIn.listen(function (data) { self.updateSigninStatus(data) })
+      self.loadedCallback();
 
-      // Handle the initial sign-in state.
-      self.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
+      const authInstance = gapi.auth2.getAuthInstance();
+
+      if (authInstance) {
+        // Listen for sign-in state changes.
+        authInstance.isSignedIn.listen(function (data) { self.updateSigninStatus(data) });
+
+        // Handle the initial sign-in state.
+        self.updateSigninStatus(authInstance.isSignedIn.get());
+      }
     })
   }
 
@@ -90,6 +102,11 @@ const GoogleAuth = function () {
   }
 
   self.login = function (callback, force = false) {
+    if (self.authMode === AUTH_MODES.API_KEY) {
+      callback();
+      return;
+    }
+
     if (force) {
       gapi.auth2.getAuthInstance().signIn({ prompt: 'select_account' }).then(callback)
       return
