@@ -5,9 +5,6 @@ require('./images/kyanWhite.svg')
 require('./images/radar_legend.png')
 require('./gtm.js')
 
-const GoogleSheetInput = require('./util/factory')
-const GoogleAuth = require('./util/googleAuth');
+const GoogleSheetInput = require('./util/factory');
 
-GoogleAuth.loadGoogle(() => {
-  GoogleSheetInput().build();
-});
+GoogleSheetInput().build();
