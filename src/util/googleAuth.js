@@ -12,8 +12,15 @@ var DISCOVERY_DOCS = ['https://sheets.googleapis.com/$discovery/rest?version=v4'
 // included, separated by spaces.
 var SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
+const AUTH_MODES = {
+  API_KEY: 'API_KEY',
+  OAUTH: 'OAUTH',
+};
+
 const GoogleAuth = function () {
-  const self = {}
+  const self = {
+    authMode: AUTH_MODES.API_KEY,
+  };
   self.isAuthorizedCallbacks = []
   self.isLoggedIn = undefined
 
@@ -95,7 +102,7 @@ const GoogleAuth = function () {
   }
 
   self.login = function (callback, force = false) {
-    if (CLIENT_ID === undefined) {
+    if (self.authMode === AUTH_MODES.API_KEY) {
       callback();
       return;
     }
