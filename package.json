@@ -7,8 +7,8 @@
     "lint:fix": "yarn run standard --fix",
     "dev": "webpack-dev-server --mode development --inline",
     "build": "webpack --mode production",
-    "end_to_end_test": "node_modules/.bin/cypress run --env host=$TEST_URL",
-    "start": "node_modules/.bin/cypress open --env host=$TEST_URL"
+    "end_to_end_test": "cypress run --env host=$TEST_URL",
+    "start": "cypress open --env host=$TEST_URL"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
