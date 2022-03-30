@@ -56,6 +56,6 @@ Runs the full test suite.
 
 ### Data
 
-The data is pulled from a google sheet.
+The data is pulled from a Google Sheet.
 
-If you need to work from a different sheet for development purposes, first make a copy of the sheet, then publish to the web, then update the `sheetUrl` variable in [`src/util/factory.js`](./src/util/factory.js).
+If you need to work from a different sheet for development purposes, first make a copy of the sheet, then publish to the web, then update your `.env` file setting the value of `SHEET_ID` to your Google Sheet ID.
